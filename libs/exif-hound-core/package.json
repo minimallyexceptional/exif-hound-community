@@ -1,0 +1,23 @@
+{
+  "name": "exif-hound-core",
+  "version": "0.0.1",
+  "main": "./index.tsx",
+  "types": "./index.tsx",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha --require ts-node/register --watch-extensions ts 'src/**/**.spec.ts'",
+    "test:watch": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=test mocha --require ts-node/register --watch-extensions ts --watch --watch-files src 'src/**/**.spec.ts'",
+    "lint": "eslint *.ts*"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.15.5",
+    "@types/sinon": "^10.0.13",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "sinon": "^15.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  }
+}
