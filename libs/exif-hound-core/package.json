@@ -1,8 +1,7 @@
 {
   "name": "exif-hound-core",
   "version": "0.0.1",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "main": "./index.ts",
   "license": "MIT",
   "scripts": {
     "test": "mocha --require ts-node/register --watch-extensions ts 'src/**/**.spec.ts'",
