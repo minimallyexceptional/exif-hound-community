@@ -20,7 +20,6 @@ export default class MapViewController {
     }
 
     initalizeMap(mapId, initialLat, initialLon, zoomLevel) {
-        console.log("INITALIZING MAP");
         this.map = L.map(mapId);
 
         this.addTileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
@@ -74,7 +73,6 @@ export default class MapViewController {
     }
 
     reInitalizeMap() {
-        console.log("REINITALIZING MAP");
 
         this.map.eachLayer(function (layer) {
             this.map.removeLayer(layer);

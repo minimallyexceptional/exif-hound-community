@@ -15,7 +15,7 @@ const App = (props) => {
     useEffect(() => {
         setTimeout(() => {
             appStore.setCurrentPage(1);
-        }, 5000);
+        }, 1000);
     }, []);
 
     const routePages = (pageENUM) => {

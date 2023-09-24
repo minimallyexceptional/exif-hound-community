@@ -1,4 +1,5 @@
-var Coordinates = import('coordinate-parser');
+import * as Coordinates from 'coordinate-parser';
+
 
 export default class GPSFormatter {
     formatCoordaniteArray(coordArray, coordRef) {

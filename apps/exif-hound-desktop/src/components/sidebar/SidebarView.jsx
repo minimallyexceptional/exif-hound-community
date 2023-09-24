@@ -75,6 +75,7 @@ const SidebarView = (props) => {
                             <span className="image-value">{image.GPSLongitude || 'N/A'}</span>
                         </div>
                     </div>
+
                     <div className="image-toolbar">
                         <button 
                             className="image-toolbar-button"
@@ -95,6 +96,7 @@ const SidebarView = (props) => {
                             <FaTrash />
                         </button>
                     </div>
+
                 </div>
             )
         })

@@ -13,7 +13,7 @@
     "blob-util": "^2.0.2",
     "blueimp-load-image": "^5.16.0",
     "coordinate-parser": "^1.0.7",
-    "exif-js": "^2.3.0",
+    "exifr": "^7.1.3",
     "leaflet": "^1.9.4",
     "leaflet-css": "^0.1.0",
     "mobx": "^6.10.2",

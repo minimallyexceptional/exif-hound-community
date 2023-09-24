@@ -1,7 +1,7 @@
 import loadImage from 'blueimp-load-image';
 
 import EXIFImageFactory from './factories/exifImageFactory';
-import EXIF from 'exif-js';
+import exifr from 'exifr' 
 
 export default class EXIFHound {
     constructor(store) {
@@ -22,10 +22,15 @@ export default class EXIFHound {
                 this.exifData = data.exif;
                 
                 if (data.exif) {
-                    EXIF.getData(img, function() {
-                        let newDataObject = EXIF.getAllTags(this);
+                    // EXIF.getData(img, function() {
+                    //     let newDataObject = EXIF.getAllTags(this);
+                    //     callback(img, newDataObject);
+                    // });
+
+                    exifr.parse(img).then((newDataObject) => {
                         callback(img, newDataObject);
                     });
+
                 } else {
                     alert('Image Does Not Contain EXIF data');
                 }
@@ -53,15 +58,22 @@ export default class EXIFHound {
                     this.exifData = data.exif;
                     
                     if (data.exif) {
-                        EXIF.getData(img, function() {
-                            let imageFactory = new EXIFImageFactory();
+                        // EXIF.getData(img, function() {
+                        //     let imageFactory = new EXIFImageFactory();
                             
-                            let newDataObject = EXIF.getAllTags(img);
+                        //     let newDataObject = EXIF.getAllTags(img);
                            
-                            let exifImage = imageFactory.createImage(img, newDataObject);
+                        //     let exifImage = imageFactory.createImage(img, newDataObject);
                             
+                        //     this.store.addImage(exifImage);
+                        // }.bind(this));
+
+                        exifr.parse(img).then((newDataObject) => {
+                            let imageFactory = new EXIFImageFactory();
+                            let exifImage = imageFactory.createImage(img, newDataObject);
                             this.store.addImage(exifImage);
-                        }.bind(this));
+                        });
+
                     } else {
                         alert('Image Does Not Contain EXIF data');
                     }
