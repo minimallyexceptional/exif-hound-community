@@ -101,7 +101,7 @@ const SidebarView = (props) => {
     }
 
     return (
-        <div id="sidebar">
+        <div id="sidebar" className='min-w-[500px]'>
             <div className="sidebar-button-bar">
                 <input ref={inputRef} type="file" onChange={loadImage} style={{ display: 'none' }} multiple />
                 <button className={'sidebar-button'} onClick={clickImage}>Add Images</button>

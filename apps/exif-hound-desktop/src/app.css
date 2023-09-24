@@ -1,140 +1,76 @@
 #app {
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    max-height: 100%;
-    width: 100%;
-    display: flex;
+    @apply p-0 m-0 h-full max-h-full w-full flex;
 
     .exif-hound-toast {
-        background-color: black;
-        color: whitesmoke;
-        font-size: 1rem;
-        font-family: Arial, Helvetica, sans-serif;
-        letter-spacing: 0.02rem;
-        text-align: center;
+        @apply bg-black text-white text-base font-sans tracking-wider text-center;
     }
 
     .exif-hound-toast-progress-bar {
-        background: whitesmoke;
+        @apply bg-white;
     }
-
 
     .sidebar-container {
-        flex-basis: 35%;
-        padding: 0;
-        margin: 0;
-        height: 100%;
+        @apply flex-1 p-0 m-0 h-full;
     }
-    
+
     .map-container {
-        flex-basis: 75%;
-        padding: 0;
-        margin: 0;
-        height: 100%;
+        @apply flex-1 p-0 m-0 h-full;
     }
 
     .exif-details-container {
-        flex-basis: 55%;
-        background-color: indianred;
-        padding: 0;
-        margin: 0;
-        height: 100%;
+        @apply flex-1 bg-red-700 p-0 m-0 h-full;
     }
 
     .side-split-container {
-        display: flex;
-        flex-direction: column;
-        background-color: #111;
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        flex-basis: 45%;
+        @apply flex flex-col bg-gray-900 p-0 m-0 h-full w-full;
 
         .side-split-section-image {
-            flex-basis: 42%;
-            background-color: #111;
-            padding: 1rem;
-            display: flex;
-            align-content: center;
-            max-height: 50%;
-            overflow-y: scroll;
+            @apply flex-1 bg-gray-900 p-4 flex items-center overflow-y-scroll;
 
             &::-webkit-scrollbar {
                 width: 0.5em !important;
             }
-            
+
             &::-webkit-scrollbar-track {
                 background-color: #333;
             }
-            
+
             &::-webkit-scrollbar-thumb {
                 background-color: #111;
                 border: solid 1px white;
             }
 
             .details-image {
-                box-sizing: border-box;
-                user-select: none;
-                pointer-events: none;
-                align-self: center;
-                justify-self: center;
-                margin: 0 auto;
-                display: block;
-                min-width: 20rem;
-                min-height: 20rem;
+                @apply box-border select-none pointer-events-none self-center justify-center mx-auto block min-w-full min-h-full;
             }
-
         }
 
-        .side-split-section-navigation { 
-            flex-basis: 6%;
-            background-color: #111;
-            border: solid 1px white;
+        .side-split-section-navigation {
+            @apply flex-1 bg-gray-900 border border-white;
 
             .navigation-button-section {
-                color: white;
-                height: 100%;
-                display: flex;
-                justify-content: space-around;
-                align-content: center;
-                
-                .navigation-button {
-                    align-self: center;
-                    height: 1.6rem;
-                    font-size: 1rem;
-                    background-color: #111;
-                    border: solid 1px white;
-                    color: white;
-                    min-width: 3rem;
-                    min-height: 1.8rem;
-                }
-                
-                .navigation-button:hover {
-                    outline: none;
-                    background-color: white;
-                    color: #111;
-                }
+                @apply text-white h-full flex justify-around items-center;
 
-                .navigation-button:focus {
-                    outline: none;
+                .navigation-button {
+                    @apply self-center h-4 text-base bg-gray-900 border border-white text-white;
+
+                    &:hover {
+                        @apply outline-none bg-white text-gray-900;
+                    }
+
+                    &:focus {
+                        @apply outline-none;
+                    }
                 }
 
                 .navigation-progress {
-                    user-select: none;
-                    align-self: center;
-                    color: white;
-                    font-size: 1rem;
-                    font-family: Arial, Helvetica, sans-serif;
-                    letter-spacing: 0.02rem;
+                    @apply select-none self-center text-white text-base font-sans tracking-wider;
                 }
             }
         }
 
-        .side-split-section-map { 
-            flex-basis: 50%;
-            background-color: #111;
-            padding: 0.8rem;
+        .side-split-section-map {
+            @apply flex-1 bg-gray-900 p-2;
         }
     }
 }

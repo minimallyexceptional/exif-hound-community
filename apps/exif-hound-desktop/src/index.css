@@ -1,15 +1,16 @@
-html, body {
-    padding: 0;
-    margin: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+/* src/index.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+html {
+    @apply p-0 m-0 h-screen w-screen overflow-hidden;
+} 
+
+body {
+    @apply p-0 m-0 h-full w-full overflow-hidden;
 }
 
 #root { 
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+    @apply p-0 m-0 h-full w-full overflow-hidden;
 }

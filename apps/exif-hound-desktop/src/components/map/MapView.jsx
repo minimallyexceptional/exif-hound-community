@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { observer } from 'mobx-react';
-import './MapView.css';
 import MapViewController from './MapViewController';
 import { useApplicationState } from '../../context/ApplicationState';
 
@@ -73,7 +72,7 @@ const MapView = (props) => {
     }
   }, [noData]);
 
-  return <div ref={mapRef} id="map"></div>;
+  return <div ref={mapRef} id="map" className='w-full min-h-screen'></div>;
 };
 
 export default observer(MapView);
