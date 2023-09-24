@@ -28,7 +28,7 @@ const App = (props) => {
     }
 
     return (
-        <div>
+        <div className='min-h-full min-w-full'>
             <ToastContainer />
             {routePages(appStore.currentPage)}
         </div>

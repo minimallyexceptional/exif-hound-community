@@ -6,12 +6,12 @@ import SidebarView from '../components/sidebar/SidebarView';
 
 const MapPage = (props) => {
     return (
-        <div className='flex full-w full-h'>
-            <div className="sidebar-container">
+        <div className='flex min-w-full max-h-full'>
+            <div className="sidebar-container h-screen">
                 <SidebarView />
             </div>
-            <div className="map-container w-full h-full bg-slate-600">
-                <MapView store={props.store} popup={true} initalMarker={[39.7589, -84.1916]} multiMarker/>
+            <div className="map-container w-screen h-screen bg-slate-600">
+                <MapView popup={true} initalMarker={[39.7589, -84.1916]} multiMarker/>
             </div>
         </div>
     );

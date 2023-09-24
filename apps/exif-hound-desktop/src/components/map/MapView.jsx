@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { observer } from 'mobx-react';
+
 import MapViewController from './MapViewController';
 import { useApplicationState } from '../../context/ApplicationState';
 
@@ -11,22 +12,18 @@ const MapView = (props) => {
   const store = useApplicationState();
 
   useEffect(() => {
-    const { initalMarker } = props;
-    if (initalMarker[0] && initalMarker[1]) {
-      controller.initalizeMap('map', ...initalMarker, 12);
-    }
-  
-    // Add a cleanup function to remove the map when the component unmounts
-    return () => {
+    // Initialize the map if it hasn't been initialized yet
+    if (!controller.map && props.initalMarker[0] && props.initalMarker[1]) {
+      controller.initializeMap('map', props.initalMarker[0], props.initalMarker[1], 12);
+    } else if (controller.map) {
+      // Map already initialized, remove any existing markers
       controller.removeMap();
-    };
+    }
   }, [props.initalMarker]);
 
   useEffect(() => {
-    const { multiMarker, currentMarker } = props;
-    controller.reInitalizeMap();
-
-    if (multiMarker) {
+    if (props.multiMarker) {
+      // controller.reinitializeMap();
       store.images.forEach((image) => {
         if (image.GPSLatitude && image.GPSLongitude) {
           controller.addMarkerWithPopupToMap(
@@ -39,28 +36,44 @@ const MapView = (props) => {
           );
         }
       });
-    } else if (currentMarker[0] && currentMarker[1]) {
-      controller.addMarkerToMap(...currentMarker, true, 16);
+    } else {
+      if (props.currentMarker[0] && props.currentMarker[1]) {
+        controller.reinitializeMap();
+        controller.addMarkerToMap(
+          props.currentMarker[0],
+          props.currentMarker[1],
+          true,
+          16
+        );
+      } else {
+        controller.reinitializeMap();
+      }
     }
-  }, [props.multiMarker, props.currentMarker, store.images]);
+  }, [store.images.length]);
 
   useEffect(() => {
-    const selectedImage = store.selectedImage;
-
-    if (selectedImage && selectedImage.GPSLatitude && selectedImage.GPSLongitude) {
+    if (store.selectedImage && store.selectedImage.GPSLatitude && store.selectedImage.GPSLongitude) {
       setNoData(false);
-      controller.setView(selectedImage.GPSLatitude, selectedImage.GPSLongitude, 16);
+      controller.setView(
+        store.selectedImage.GPSLatitude,
+        store.selectedImage.GPSLongitude,
+        16
+      );
     }
-
-    if (selectedImage && selectedImage.GPSLatitude && selectedImage.GPSLongitude && !props.multiMarker) {
+    if (store.selectedImage && store.selectedImage.GPSLatitude && store.selectedImage.GPSLongitude && !props.multiMarker) {
       setNoData(false);
-      controller.reInitalizeMap();
-      controller.addMarkerToMap(selectedImage.GPSLatitude, selectedImage.GPSLongitude, true, 16);
-    } else if (selectedImage && !selectedImage.GPSLatitude && !selectedImage.GPSLongitude && !props.multiMarker) {
+      controller.reinitializeMap();
+      controller.addMarkerToMap(
+        store.selectedImage.GPSLatitude,
+        store.selectedImage.GPSLongitude,
+        true,
+        16
+      );
+    } else if (store.selectedImage && !store.selectedImage.GPSLatitude && !store.selectedImage.GPSLongitude && !props.multiMarker) {
       setNoData(true);
-      controller.reInitalizeMap();
+      controller.reinitializeMap();
     }
-  }, [store.selectedImage, props.multiMarker]);
+  }, [store.selectedImage]);
 
   useEffect(() => {
     if (noData === true) {
@@ -72,7 +85,7 @@ const MapView = (props) => {
     }
   }, [noData]);
 
-  return <div ref={mapRef} id="map" className='w-full min-h-screen'></div>;
-};
+  return <div ref={mapRef} id="map" className='w-full h-full' />;
+}
 
 export default observer(MapView);
