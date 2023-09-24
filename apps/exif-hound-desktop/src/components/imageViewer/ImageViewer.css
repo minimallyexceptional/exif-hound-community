@@ -1,0 +1,12 @@
+#seaDragon {
+    height: 100%;
+    width: 100%;
+}
+
+#seaDragon:focus {
+    outline: none;
+}
+
+canvas:focus {
+    outline: none;
+}

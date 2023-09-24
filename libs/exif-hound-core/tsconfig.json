@@ -14,5 +14,5 @@
       "src",
       "test",
       "@types"
-    ]
+, "coordinate-parser.d.ts"    ]
   }

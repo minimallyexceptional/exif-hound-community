@@ -4,7 +4,7 @@
   "private": true,
   "description": "Exif Hound API",
   "author": "Minimally Exceptional LLC",
-  "main": "src/server/server.ts",
+  "main": "src/server.ts",
   "scripts": {
     "start": "ts-node src/server/server.ts",
     "dev": "nodemon src/server/server.ts",

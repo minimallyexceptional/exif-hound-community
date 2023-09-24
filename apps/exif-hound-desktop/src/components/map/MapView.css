@@ -1,0 +1,16 @@
+#map {
+    height: 500px;
+    width: 500px;
+    filter: grayscale(0);
+
+    .image-marker-popup {
+        pointer-events: none;
+        height: 150px; 
+        width: 200px;
+    }
+}
+
+.map-placeholder {
+    width: 90%;
+    margin: 0 auto;
+}

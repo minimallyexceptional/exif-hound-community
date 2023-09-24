@@ -9,6 +9,7 @@
     "lint": "eslint *.ts*"
   },
   "devDependencies": {
+    "@types/blueimp-load-image": "^5.16.3",
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.15.5",
@@ -18,5 +19,12 @@
     "sinon": "^15.0.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "blob-util": "^2.0.2",
+    "blueimp-load-image": "^5.16.0",
+    "exif-js": "^2.3.0",
+    "exif-parser": "^0.1.12",
+    "piexif": "^0.0.2"
   }
 }

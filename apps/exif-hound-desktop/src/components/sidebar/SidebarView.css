@@ -1,0 +1,161 @@
+#sidebar {
+    height: 100%;
+    padding: 0.8rem;
+    box-sizing: border-box;
+    background-image: url('../../assets/img/background.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    .sidebar-button-bar {
+        display: flex;
+        height: 50px;
+        padding: 1rem;
+        
+        .sidebar-button {
+            user-select: none;
+            text-align: center;
+            align-self: center;
+            height: 1.6rem;
+            font-size: 2rem;
+            letter-spacing: 0.05rem;
+            text-transform: uppercase;
+            background-color: #111;
+            border: solid 1px white;
+            color: white;
+            min-width: 3rem;
+            min-height: 1.8rem;
+            width: 100%;
+            height: 4rem;
+        }
+        
+        .sidebar-button:hover {
+            outline: none;
+            background-color: white;
+            color: #111;
+        }
+
+        .sidebar-button:focus {
+            outline: none;
+        }
+    }
+    .sidebar-content {
+        padding: 1rem;
+        height: calc(100% - 70px);
+        overflow-y: auto;
+        
+        &::-webkit-scrollbar {
+            width: 0.5em !important;
+        }
+        
+        &::-webkit-scrollbar-track {
+            background-color: #333;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background-color: #111;
+            border: solid 1px white;
+        }
+
+        .sidebar-item {
+            position: relative;
+            display: flex;
+            height: 8rem;
+            border: solid 1px white;
+            margin-bottom: 1rem;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+
+            .image-thumbnail {
+                flex-basis: 15%;
+                position: relative;
+                justify-self: center;
+                align-self: center;
+
+                img {
+                    pointer-events: none;
+                    user-select: none;
+                    max-height: 8rem;
+                }
+            }
+
+            .image-data {
+                flex-basis: 85%;
+                box-sizing: border-box;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                height: 100%;
+                padding: 0 1rem 0 1rem;
+                
+                
+                .image-datapoint {
+                    margin-bottom: 1rem 0 1rem 0;
+
+                    .image-detail {
+                        font-size: 1rem;
+                        font-family: Arial, Helvetica, sans-serif;
+                        letter-spacing: 0.02rem;
+                        padding: 0.3rem;
+                        font-weight: 700;
+                        background-color: white;
+                        color: black;
+                        user-select: none;
+                    }
+
+                    .image-value {
+                        font-size: 1rem;
+                        font-family: Arial, Helvetica, sans-serif;
+                        letter-spacing: 0.02rem;
+                        padding: 0.2rem;
+                        margin: 0 0 0 1rem;
+                        color:white;
+    
+                        &::selection {
+                            background: white;
+                            color: black;
+                            padding: 0.8rem;
+                        }
+                        
+                        &::-moz-selection {
+                            background: #ffb7b7; /* Gecko Browsers */
+                        }
+                    }
+                }
+            }
+
+            .image-toolbar {
+                flex-basis: 10%;
+                background-color: purple;
+                display: flex;
+                flex-direction: column;
+                justify-self: flex-end;
+
+                .image-toolbar-button {
+                    justify-self: flex-end;
+                    flex-basis: 33.333%;
+                    align-self: center;
+                    height: 1.6rem;
+                    font-size: 1.2rem;
+                    background-color: #111;
+                    border: solid 1px white;
+                    color: white;
+                    min-width: 100%;
+                    min-height: 1.8rem;
+                }
+                
+                .image-toolbar-button:hover {
+                    outline: none;
+                    background-color: white;
+                    color: #111;
+                }
+
+                .image-toolbar-button:focus {
+                    outline: none;
+                }
+                  
+            }
+        }   
+    }
+}

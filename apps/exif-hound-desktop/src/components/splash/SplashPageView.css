@@ -1,0 +1,35 @@
+#splash-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 99999999;
+    background-color: black;
+
+    #logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        z-index: 999999999;
+        background-image: url('../../assets/img/Logo.png');
+        background-position: center;
+        background-size: 30%;
+        background-repeat: no-repeat;
+    }
+
+    #background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-image: url('../../assets/img/Splash.jpg');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: 0.2;
+    }
+}
