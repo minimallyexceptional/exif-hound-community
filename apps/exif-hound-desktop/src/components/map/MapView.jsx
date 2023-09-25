@@ -56,6 +56,8 @@ const MapView = (props) => {
         map.setView(position, map.getZoom());
       }
     }), []);
+    
+    map.flyTo(position, 16);
   
     return (
       <Marker position={position}  eventHandlers={markerEvents} onMount={() => console.log('waypoint added')}>
