@@ -24,43 +24,24 @@ const MapView = (props) => {
   }, [store.selectedImage, store.images]);
 
   function LocationMarker({ position, image }) {
-    console.log('position', position);
-    console.log('image', image);
     const store = useApplicationState();
 
     const map = useMapEvents({
       click() {
-        map.locate()
+        console.log('map clicked');
       },
-      locationfound(e) {
-        setPosition(e.latlng)
-        map.flyTo(e.latlng, map.getZoom())
-      },
-      waypointadded(e) {
-        console.log('waypoint added', e);
-      },
-      onload() {
-        console.log('map loaded');
-      }
     })
 
     const markerEvents = useMemo(() => ({
       click() {
         map.setView(position, map.getZoom());
       },
-      onLoad() {
-        console.log('marker loaded');
-        this.dispatchEvent('waypointadded');
-      },
-      waypointadded() {
-        map.setView(position, map.getZoom());
-      }
     }), []);
     
     map.flyTo(position, 16);
   
     return (
-      <Marker position={position}  eventHandlers={markerEvents} onMount={() => console.log('waypoint added')}>
+      <Marker position={position}  eventHandlers={markerEvents}>
         <Popup>
           <img className='w-[250px] max-w-full p-2' src={image.ImageData} />
         </Popup>
@@ -80,7 +61,6 @@ const MapView = (props) => {
       />
 
       {store.images.map((waypoint) => {
-        console.log('waypoint', waypoint);
         if (waypoint && waypoint.GPSLatitude && waypoint.GPSLongitude) {
           return (
             <LocationMarker position={[waypoint.GPSLatitude, waypoint.GPSLongitude]} image={waypoint} />
