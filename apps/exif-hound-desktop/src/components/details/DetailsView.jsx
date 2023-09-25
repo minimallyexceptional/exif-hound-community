@@ -1,25 +1,21 @@
 import React from 'react';
+import { useApplicationState } from '../../context/ApplicationState';
 import { FaCopy } from 'react-icons/fa';
-import { toast } from 'react-toastify';
 import { observer } from 'mobx-react';
 
 import './DetailsView.css';
 
 import DetailsViewController from './DetailsViewController';
 
-const DetailsView = (props) => {
+const DetailsView = () => {
     const controller = new DetailsViewController();
 
     const detailValueRef = React.createRef();
-
-    toast.configure({ 
-        autoClose: 80,
-        draggable: false,
-    });
+    const store = useApplicationState();
 
     const clickBack = () => {
-        props.store.setCurrentPage(1);
-        props.store.setSelectedImage(null);
+        store.setCurrentPage(1);
+        store.setSelectedImage(null);
     }
 
     const clickCopy = (currentValue) => {
@@ -85,8 +81,8 @@ const DetailsView = (props) => {
                 <button className={'details-button'} onClick={clickBack}>Back</button>
             </div>
             <div className="details-content">
-                {renderThumbnail(props.store.selectedImage.ThumbnailData)}
-                {renderDetailItems(controller.formatDetailsArray(props.store.selectedImage))}
+                {renderThumbnail(store.selectedImage.ThumbnailData)}
+                {renderDetailItems(controller.formatDetailsArray(store.selectedImage))}
             </div>
         </div>
     )

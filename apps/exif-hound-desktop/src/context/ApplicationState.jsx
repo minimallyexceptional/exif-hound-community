@@ -30,6 +30,7 @@ class ApplicationState {
   images = [];
   addImage = (imageObject) => {
     this.images.push(imageObject);
+    this.selectedImage = imageObject;
   };
 }
 

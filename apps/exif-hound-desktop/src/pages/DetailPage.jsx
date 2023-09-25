@@ -1,14 +1,17 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { FaChevronCircleRight, FaChevronCircleLeft } from "react-icons/fa";
+import { useApplicationState } from '../context/ApplicationState';
 
 import MapView from '../components/map/MapView'
 import DetailsView from '../components/details/DetailsView';
 import ImageViewer from '../components/imageViewer/ImageViewer';
 
-const DetailPage = (props) => {
+const DetailPage = () => {
 
-    const navigateToNextImage = (store) => {
+    const store = useApplicationState();
+
+    const navigateToNextImage = () => {
         let currentIndex = store.images.indexOf(store.selectedImage);
         let maxIndex = store.images.length;
 
@@ -19,7 +22,7 @@ const DetailPage = (props) => {
         }
     }
 
-    const navigateToPreviousImage = (store) => {
+    const navigateToPreviousImage = () => {
         let currentIndex = store.images.indexOf(store.selectedImage);
         let maxIndex = store.images.length;
 
@@ -32,17 +35,16 @@ const DetailPage = (props) => {
 
     const renderSelectedImage = (selectedImage) => {
         if (selectedImage) {
-            return <ImageViewer selectedImage={props.store.selectedImage.ImageElement.src} />;
+            return <ImageViewer selectedImage={store.selectedImage.ImageElement.src} />;
         }
     }
 
     const renderMapView = (selectedImage) => {
         if (selectedImage) {
             return <MapView 
-                store={props.store} 
                 popup={false} 
                 initalMarker={[39.7589, -84.1916]}
-                currentMarker={[props.store.selectedImage.GPSLatitude, props.store.selectedImage.GPSLongitude]} 
+                currentMarker={[store.selectedImage.GPSLatitude, store.selectedImage.GPSLongitude]} 
                 multiMarker={false} 
             />
         }
@@ -51,33 +53,33 @@ const DetailPage = (props) => {
     return (
         <React.Fragment>
             <div className="exif-details-container">
-                <DetailsView store={props.store}/>
+                <DetailsView store={store}/>
             </div>
             <div className="side-split-container">
                 <div className="side-split-section-image">
-                    {renderSelectedImage(props.store.selectedImage)}
+                    {renderSelectedImage(store.selectedImage)}
                 </div>
                 <div className="side-split-section-navigation">
                     <div className="navigation-button-section">
                         <button 
                             className="navigation-button"
-                            onClick={() => navigateToPreviousImage(props.store)}
+                            onClick={() => navigateToPreviousImage(store)}
                         >
                             <FaChevronCircleLeft/>
                         </button>
                         <span className="navigation-progress">
-                            {`${props.store.images.indexOf(props.store.selectedImage)}/${props.store.images.length}`}
+                            {`${store.images.indexOf(store.selectedImage)}/${store.images.length}`}
                         </span>
                         <button 
                             className="navigation-button"
-                            onClick={() => navigateToNextImage(props.store)}
+                            onClick={() => navigateToNextImage()}
                         >
                             <FaChevronCircleRight/>
                         </button>
                     </div>
                 </div>
                 <div className="side-split-section-map">
-                    {renderMapView(props.store.selectedImage)}
+                    {renderMapView(store.selectedImage)}
                 </div>
             </div>
         </React.Fragment>

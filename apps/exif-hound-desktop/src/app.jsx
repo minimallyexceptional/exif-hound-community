@@ -8,6 +8,7 @@ import './app.css';
 
 import SplashPage from './pages/SplashPage';
 import MapPage from './pages/MapPage';
+import DetailPage from './pages/DetailPage';
 
 const App = (props) => {
     const appStore = useApplicationState();
@@ -24,6 +25,8 @@ const App = (props) => {
                 return <SplashPage />
             case 1:
                 return <MapPage />
+            case 2:
+                return <DetailPage />
         }
     }
 

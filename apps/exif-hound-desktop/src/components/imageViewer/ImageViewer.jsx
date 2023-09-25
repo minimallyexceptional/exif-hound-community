@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 
-import './ImageViewer.css';
+// import './ImageViewer.css';
 import ImageViewerController from './ImageViewerController';
 
 const controller = new ImageViewerController();

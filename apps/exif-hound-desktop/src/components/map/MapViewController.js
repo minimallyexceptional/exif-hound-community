@@ -45,58 +45,69 @@ export default class MapViewController {
     }
 
     setView(lat, lon, zoomLevel) {
-        return this.map.setView([lat, lon], zoomLevel);
+        if (this.map) {
+            return this.map.setView([lat, lon], zoomLevel);
+        }
     }
 
     addMarkerToMap(lat, lon, setView, zoomLevel) {
         let marker = L.marker([lat, lon]);
 
-        if (setView) {
-            this.setView(lat, lon, zoomLevel)
+        if (this.map) {
+            if (setView) {
+                this.setView(lat, lon, zoomLevel)
+            }
+    
+            return this.map.addLayer(marker);
         }
-
-        return this.map.addLayer(marker);
     }
 
     removeMarkers() {
-        this.map.eachLayer((layer) => {
-          if (layer instanceof L.Marker) {
-            this.map.removeLayer(layer);
-          }
-        });
+        if (this.map) {
+            this.map.eachLayer((layer) => {
+                if (layer instanceof L.Marker) {
+                    this.map.removeLayer(layer);
+                }
+            });
+        }
     }
 
     addMarkerWithPopupToMap(lat, lon, popupString, openPopup, setView, zoomLevel) {        
         let marker = L.marker([lat, lon]);
         
-        if (setView) {
-            this.setView(lat, lon, zoomLevel)
+        if (this.map) {
+            if (setView) {
+                this.setView(lat, lon, zoomLevel)
+            }
+    
+            this.map.addLayer(marker)
+    
+            if (openPopup) {
+                marker.bindPopup(popupString).openPopup()
+            } else {
+                marker.bindPopup(popupString)
+            }
+    
+            return marker;
         }
-
-        this.map.addLayer(marker)
-
-        if (openPopup) {
-            marker.bindPopup(popupString).openPopup()
-        } else {
-            marker.bindPopup(popupString)
-        }
-
-        return marker;
     }
 
     reinitializeMap() {
 
-        this.map.eachLayer((layer) => {
-            this.map.removeLayer(layer);
-        });
-
-        this.addTileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
-            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            subdomains: 'abcd',
-            minZoom: 0,
-            maxZoom: 20,
-            ext: 'png'
-        });
+        if (this.map) {
+            this.map.eachLayer((layer) => {
+                this.map.removeLayer(layer);
+            });
+        } else {
+            this.map = L.map('map');
+            this.addTileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}', {
+                attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                subdomains: 'abcd',
+                minZoom: 0,
+                maxZoom: 20,
+                ext: 'png'
+            });
+        }
     }
 
 }
