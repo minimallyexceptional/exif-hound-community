@@ -22,11 +22,6 @@ export default class EXIFHound {
                 this.exifData = data.exif;
                 
                 if (data.exif) {
-                    // EXIF.getData(img, function() {
-                    //     let newDataObject = EXIF.getAllTags(this);
-                    //     callback(img, newDataObject);
-                    // });
-
                     exifr.parse(img).then((newDataObject) => {
                         callback(img, newDataObject);
                     });
@@ -58,15 +53,6 @@ export default class EXIFHound {
                     this.exifData = data.exif;
                     
                     if (data.exif) {
-                        // EXIF.getData(img, function() {
-                        //     let imageFactory = new EXIFImageFactory();
-                            
-                        //     let newDataObject = EXIF.getAllTags(img);
-                           
-                        //     let exifImage = imageFactory.createImage(img, newDataObject);
-                            
-                        //     this.store.addImage(exifImage);
-                        // }.bind(this));
 
                         exifr.parse(img).then((newDataObject) => {
                             let imageFactory = new EXIFImageFactory();

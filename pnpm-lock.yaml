@@ -175,22 +175,10 @@ importers:
       blob-util:
         specifier: ^2.0.2
         version: 2.0.2
-      blueimp-load-image:
-        specifier: ^5.16.0
-        version: 5.16.0
-      exif-js:
-        specifier: ^2.3.0
-        version: 2.3.0
-      exif-parser:
-        specifier: ^0.1.12
-        version: 0.1.12
-      piexif:
-        specifier: ^0.0.2
-        version: 0.0.2
+      exifr:
+        specifier: ^7.1.3
+        version: 7.1.3
     devDependencies:
-      '@types/blueimp-load-image':
-        specifier: ^5.16.3
-        version: 5.16.3
       '@types/chai':
         specifier: ^4.3.4
         version: 4.3.4
@@ -212,12 +200,6 @@ importers:
       sinon:
         specifier: ^15.0.2
         version: 15.0.2
-      ts-node:
-        specifier: ^10.9.1
-        version: 10.9.1(@types/node@18.15.10)(typescript@5.0.2)
-      typescript:
-        specifier: ^5.0.2
-        version: 5.0.2
 
   libs/ui:
     devDependencies:
@@ -1314,10 +1296,6 @@ packages:
 
   /@tsconfig/node16@1.0.3:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
-    dev: true
-
-  /@types/blueimp-load-image@5.16.3:
-    resolution: {integrity: sha512-5XSZLnb7e3roqxR9cOTlqMG9K1WFGhN1XUk0d8reigdG8Du7jP/me1FOLbUzqNYIQuk/ot1oQky/Dh0HgsLh4Q==}
     dev: true
 
   /@types/bunyan@1.8.8:
@@ -2939,14 +2917,6 @@ packages:
       assert-plus: 1.0.0
     dev: true
 
-  /exif-js@2.3.0:
-    resolution: {integrity: sha512-1Og9pAzG2FZRVlaavH8bB8BTeHcjMdJhKmeQITkX+uLRCD0xPtKAdZ2clZmQdJ56p9adXtJ8+jwrGp/4505lYg==}
-    dev: false
-
-  /exif-parser@0.1.12:
-    resolution: {integrity: sha512-c2bQfLNbMzLPmzQuOr8fy0csy84WmwnER81W88DzTp9CYNPJ6yzOj2EZAh9pywYpqHnshVLHQJ8WzldAyfY+Iw==}
-    dev: false
-
   /exifr@7.1.3:
     resolution: {integrity: sha512-g/aje2noHivrRSLbAUtBPWFbxKdKhgj/xr1vATDdUXPOFYJlQ62Ft0oy+72V6XLIpDJfHs6gXLbBLAolqOXYRw==}
     dev: false
@@ -4242,10 +4212,6 @@ packages:
     dependencies:
       safe-buffer: 5.2.1
     dev: true
-
-  /piexif@0.0.2:
-    resolution: {integrity: sha512-a78AfSOYCXAx+tj/46kzAntKbxlSLyXta75LL6OxPLtSPQwCvqx3OfPvUEHT5Y/9FZsgxtgBu4CUf90F44B5Sw==}
-    dev: false
 
   /pify@2.3.0:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
