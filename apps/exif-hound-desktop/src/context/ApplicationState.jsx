@@ -32,6 +32,11 @@ class ApplicationState {
     this.images.push(imageObject);
     this.selectedImage = imageObject;
   };
+
+  setImages = (imageObjects) => {
+    this.images = [...imageObjects, ...this.images];
+    this.selectedImage = imageObjects[0];
+  };
 }
 
 // Create a context for the store

@@ -1,7 +1,6 @@
-const Coordinates = require('coordinate-parser');
+import Coordinates from 'coordinate-parser';
 
-
-class GPSFormatter {
+export default class GPSFormatter {
     formatCoordaniteArray(coordArray, coordRef) {
         return `${coordArray[0]}:${coordArray[1]}:${coordArray[2]}${coordRef}`
     }
@@ -17,5 +16,3 @@ class GPSFormatter {
         return new Coordinates(`${latString} ${lonString}`);
     }
 }
-
-module.exports = GPSFormatter;

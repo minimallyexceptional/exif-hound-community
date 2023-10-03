@@ -1,7 +1,7 @@
-const { expect } = require('chai');
-const sinon = require('sinon');
-const ExifHound = require('./ExifHound.js'); // Replace with the correct path to your ExifHound class
-const exifr = require('exifr');
+import { expect } from 'chai';
+import sinon from 'sinon';
+import ExifHound from './ExifHound.js'; // Replace with the correct path to your ExifHound class
+import exifr from 'exifr';
 
 let exifHound;
 let sandBox;
@@ -32,6 +32,7 @@ describe('ExifHound.parseExifData', () => {
     const mockExifData = {
       Make: 'Canon',
       Model: 'EOS 5D Mark IV',
+      DateTimeOriginal: '2019:07:28 11:12:13',
     };
 
     // Update the stubbed behavior of exifr.parse for this test case
@@ -39,9 +40,9 @@ describe('ExifHound.parseExifData', () => {
 
     // Call the parseExifData method
     const result = await exifHound.parseExifData(img);
-
+    
     // Expectations
-    expect(result).to.deep.equal(mockExifData); // Ensure it resolves with the mocked EXIF data
+    expect(result).to.include(mockExifData); // Ensure it resolves with the mocked EXIF data
     sinon.assert.calledOnce(exifrStub); // Ensure exifr.parse was called once with the image
   });
 

@@ -1,10 +1,11 @@
 {
   "name": "exif-hound-core",
   "version": "0.0.1",
-  "main": "./index.ts",
+  "main": "./index.js",
   "license": "MIT",
+  "type": "module",
   "scripts": {
-    "test": "mocha --watch-extensions js 'src/**/**.spec.js'",
+    "test": "ts-node ./node_modules/mocha/bin/mocha --watch-extensions js 'src/**/**.spec.js'",
     "test:watch": "mocha --watch-extensions js --watch --watch-files src 'src/**/**.spec.js'",
     "lint": "eslint *.ts*"
   },
@@ -13,12 +14,17 @@
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.15.5",
     "@types/sinon": "^10.0.13",
+    "babel-node": "0.0.1-security",
     "chai": "^4.3.7",
+    "esm": "^3.2.25",
     "mocha": "^10.2.0",
-    "sinon": "^15.0.2"
+    "sinon": "^15.0.2",
+    "ts-node": "^10.9.1"
   },
   "dependencies": {
     "blob-util": "^2.0.2",
+    "buffer": "^6.0.3",
+    "coordinate-parser": "^1.0.7",
     "exifr": "^7.1.3"
   }
 }

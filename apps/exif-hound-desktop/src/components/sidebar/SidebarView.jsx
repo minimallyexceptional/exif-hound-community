@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 
 
 import './SidebarView.css';
-import EXIFHound from '../../core/exifHound';
+import FileLoader from '../../core/FileLoader';
 
 
 const SidebarView = (props) => {
@@ -13,7 +13,7 @@ const SidebarView = (props) => {
     let inputRef = React.createRef();
     let store = useApplicationState();
     
-    const hound = new EXIFHound(store);
+    const fileLoader = new FileLoader(store);
 
     useEffect(() => {
     }, [store.images.length])
@@ -23,7 +23,7 @@ const SidebarView = (props) => {
     }
 
     const loadImage = (e) => {
-        hound.loadMultipleImages(e);
+        return fileLoader.loadMultipleImages(e.target.files)
     }
 
     const setSelectedImage = (imageObject) => {

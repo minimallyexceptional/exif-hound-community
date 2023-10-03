@@ -1,54 +1,58 @@
-const ExifImage = require('../types/ExifImage');
-const GPSFormatter = require('../formatters/gpsFormatter');
-const DataFormatter = require('../formatters/dataFormatter');
+import ExifImage from '../types/ExifImage.js';
+import GPSFormatter from '../formatters/gpsFormatter.js';
+import DataFormatter from '../formatters/dataFormatter.js';
 
-class ExifImageFactory {
+export default class ExifImageFactory {
     constructor() {
         this.image = null;
 
         this.gpsFormatter = new GPSFormatter();
         this.dataFormatter = new DataFormatter();
     }
+
     createImage(ImageElement, exifDataObject) {
         this.image = new ExifImage();
     
         // Parsed Values
         this.latitudeString = this.parseLatitudeString(exifDataObject);
         this.longitudeString = this.parseLongitudeString(exifDataObject);
-
-        // Image Values
-        this.image.ImageElement = `${ImageElement}` || null;
-        this.image.ImageData = `${ImageElement.src}` || null;
-        // this.image.Thumbnail = `${exifDataObject.thumbnail}` || null;
-        // blobToDataURL(exifDataObject.thumbnail.blob).then(res => {
-        //     this.image.ThumbnailData = res || null;
-        // })
-
-        // // Time and Date
+    
+        // Set Image Element and Data
+        if (ImageElement) {
+            this.image.ImageElement = ImageElement || null;
+            this.image.ImageData = this.dataFormatter.blobToDataUrl(ImageElement) || null;
+        }
+    
+        // Set Thumbnail Data
+        this.image.Thumbnail = exifDataObject.thumbnail || null;
+    
+        if (exifDataObject.thumbnail) {
+            this.image.ThumbnailData = this.dataFormatter.blobToDataUrl(exifDataObject.thumbnail) || null;
+        }
+    
+        // Set Time and Date
         this.image.DateTimeOriginal = `${exifDataObject.DateTimeOriginal}` || null;
         this.image.DateTime = `${exifDataObject.DateTime}` || null;
         this.image.DateTimeDigitized = `${exifDataObject.DateTimeDigitized}` || null;
-
-        // Meta
+    
+        // Set Meta
         this.image.ExifVersion = `${exifDataObject.ExifVersion}` || null;
         this.image.ExifIFDPointer = `${exifDataObject.ExifIFDPointer}` || null;
-
-        // GPS
+    
+        // Set GPS Data
         this.image.GPSLatitude = this.parseLatitude(this.latitudeString, this.longitudeString) || null;
         this.image.GPSLongitude = this.parseLongitude(this.latitudeString, this.longitudeString) || null;
         this.image.GPSDateStamp = `${exifDataObject.GPSDateStamp}` || null;
         this.image.GPSMapDatum = `${exifDataObject.GPSMapDatum}` || null;
         this.image.GPSSatellites = `${exifDataObject.GPSSatellites}` || null;
         this.image.GPSImgDirectionRef = `${exifDataObject.GPSImgDirectionRef}` || null;
-
-
-        // Camera Data
+    
+        // Set Camera Data
         this.image.Make = `${exifDataObject.Make}` || null;
         this.image.Model = `${exifDataObject.Model}` || null;
         this.image.Software = `${exifDataObject.Software}` || null;
-
-
-        // Picture Data
+    
+        // Set Picture Data
         this.image.ImageDescription = `${exifDataObject.ImageDescription}` || null;
         this.image.Flash = `${exifDataObject.Flash}` || null;
         this.image.FlashpixVersion = `${exifDataObject.FlashpixVersion}` || null;
@@ -58,7 +62,8 @@ class ExifImageFactory {
         this.image.ISOSpeedRatings = `${exifDataObject.ISOSpeedRatings}` || null;
         this.image.FileSource = `${exifDataObject.FileSource}` || null;
         this.image.LightSource = `${exifDataObject.LightSource}` || null;
-
+    
+        // Set Additional Data
         this.image.ComponentsConfiguration = `${exifDataObject.ComponentsConfiguration}` || null;
         this.image.Contrast = `${exifDataObject.Contrast}` || null;
         this.image.CustomRendered = `${exifDataObject.CustomRendered}` || null;
@@ -79,10 +84,11 @@ class ExifImageFactory {
         this.image.YResolution = `${exifDataObject.YResolution}` || null;
         this.image.YCbCrPositioning = `${exifDataObject.Orientation}` || null;
         this.image.Orientation = `${exifDataObject.Orientation}` || null;
-
+    
         return this.image;
     }
 
+    
     parseLatitudeString(exifDataObject) {
         if (exifDataObject.GPSLatitude) {
             return this.gpsFormatter.formatCoordaniteArray(
@@ -137,5 +143,3 @@ class ExifImageFactory {
         }
     }
 }
-
-module.exports = ExifImageFactory;

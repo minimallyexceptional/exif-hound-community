@@ -1,4 +1,4 @@
-class ExifImage {
+export default class ExifImage {
     constructor() {
         // Image Values
         this.ImageElement = null;
@@ -36,5 +36,3 @@ class ExifImage {
         this.LightSource = null;
     }
 }
-
-module.exports = ExifImage;
