@@ -197,15 +197,9 @@ importers:
       '@types/sinon':
         specifier: ^10.0.13
         version: 10.0.13
-      babel-node:
-        specifier: 0.0.1-security
-        version: 0.0.1-security
       chai:
         specifier: ^4.3.7
         version: 4.3.7
-      esm:
-        specifier: ^3.2.25
-        version: 3.2.25
       mocha:
         specifier: ^10.2.0
         version: 10.2.0
@@ -1769,10 +1763,6 @@ packages:
       deep-equal: 2.2.0
     dev: false
 
-  /babel-node@0.0.1-security:
-    resolution: {integrity: sha512-zF3D9H2FA2xrP+B/X462G+38aHpmR+33jBF7NowfPuV4CiPEzAR1Typ1RC+qPfe0vCeWeV0FLG2pfVGb0vIfeg==}
-    dev: true
-
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
@@ -2855,11 +2845,6 @@ packages:
       text-table: 0.2.0
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /esm@3.2.25:
-    resolution: {integrity: sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==}
-    engines: {node: '>=6'}
     dev: true
 
   /espree@7.3.1:
