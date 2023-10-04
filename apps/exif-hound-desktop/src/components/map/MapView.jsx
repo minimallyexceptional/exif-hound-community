@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 
 import { MapContainer } from 'react-leaflet/MapContainer'
 import { TileLayer } from 'react-leaflet/TileLayer'
-import { useMap, useMapEvents } from 'react-leaflet/hooks'
+import { useMapEvents } from 'react-leaflet/hooks'
 import { Marker } from 'react-leaflet/Marker'
 import { Popup } from 'react-leaflet/Popup'
 
@@ -24,7 +24,6 @@ const MapView = (props) => {
   }, [store.selectedImage, store.images]);
 
   function LocationMarker({ position, image }) {
-    const store = useApplicationState();
 
     const map = useMapEvents({
       click() {
@@ -63,7 +62,7 @@ const MapView = (props) => {
       {store.images.map((waypoint) => {
         if (waypoint && waypoint.GPSLatitude && waypoint.GPSLongitude) {
           return (
-            <LocationMarker position={[waypoint.GPSLatitude, waypoint.GPSLongitude]} image={waypoint} />
+            <LocationMarker key={waypoint.Id} position={[waypoint.GPSLatitude, waypoint.GPSLongitude]} image={waypoint} />
           )
         } else {
           return null;

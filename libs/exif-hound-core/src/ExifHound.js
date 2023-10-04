@@ -9,13 +9,12 @@ export default class ExifHound {
     }
 
     parseExifData(img) {
-      console.log("GOT IMAGE ", img);
         return new Promise((resolve, reject) => {
             exifr.parse(img).then((newDataObject) => {
               this.ImageElement = img;
               this.exifData = newDataObject;
               let exifImage = this.imageFactory.createImage(img, this.exifData);
-              
+        
               resolve(exifImage);
             }).catch((error) => {
               reject(error);

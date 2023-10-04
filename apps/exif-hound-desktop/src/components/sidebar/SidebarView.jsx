@@ -5,15 +5,13 @@ import { observer } from 'mobx-react';
 
 
 import './SidebarView.css';
-import FileLoader from '../../core/FileLoader';
+import loadImages from '../../core/FileLoader';
 
 
 const SidebarView = (props) => {
 
     let inputRef = React.createRef();
     let store = useApplicationState();
-    
-    const fileLoader = new FileLoader(store);
 
     useEffect(() => {
     }, [store.images.length])
@@ -23,7 +21,7 @@ const SidebarView = (props) => {
     }
 
     const loadImage = (e) => {
-        return fileLoader.loadMultipleImages(e.target.files)
+        return loadImages(e.target.files, store);
     }
 
     const setSelectedImage = (imageObject) => {

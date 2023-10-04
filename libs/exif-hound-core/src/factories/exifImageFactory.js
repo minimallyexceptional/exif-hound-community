@@ -1,6 +1,7 @@
 import ExifImage from '../types/ExifImage.js';
 import GPSFormatter from '../formatters/gpsFormatter.js';
 import DataFormatter from '../formatters/dataFormatter.js';
+import { UUID } from '../../utils/utils.js';
 
 export default class ExifImageFactory {
     constructor() {
@@ -10,17 +11,83 @@ export default class ExifImageFactory {
         this.dataFormatter = new DataFormatter();
     }
 
-    createImage(ImageElement, exifDataObject) {
+    parseLatitudeString(exifDataObject) {
+        if (exifDataObject.GPSLatitude) {
+            return this.gpsFormatter.formatCoordaniteArray(
+                [exifDataObject.GPSLatitude[0], 
+                exifDataObject.GPSLatitude[1], 
+                exifDataObject.GPSLatitude[2]], 
+                exifDataObject.GPSLatitudeRef
+            );
+        } else {
+            return null;
+        }
+    }
+
+    parseLongitudeString(exifDataObject) {
+        if (exifDataObject.GPSLongitude) {
+            return this.gpsFormatter.formatCoordaniteArray([
+                exifDataObject.GPSLongitude[0], 
+                exifDataObject.GPSLongitude[1], 
+                exifDataObject.GPSLongitude[2]], 
+                exifDataObject.GPSLongitudeRef
+            );
+        } else {
+            return null;
+        }
+    }
+
+    parseLatitude(lat, lon) {
+        if (lat && lon) {
+            return this.gpsFormatter.formatPosition(lat, lon).getLatitude();
+        } else {
+            return null;
+        }
+    }
+
+    parseLongitude(lat, lon) {
+        if (lat && lon) {
+            return this.gpsFormatter.formatPosition(lat, lon).getLongitude();
+        } else {
+            return null;
+        }
+    }
+    
+
+    parsePosition(lat, lon) {
+        if (lat && lon) {
+            return this.gpsFormatter.formatPosition(this.latitude, this.longitude);
+        } else {
+            return {
+                latitude: null,
+                longitude: null
+            }
+        }
+    }
+
+    async createImage(ImageElement, exifDataObject) {
         this.image = new ExifImage();
     
+
+        this.image.Id = UUID();
+
         // Parsed Values
         this.latitudeString = this.parseLatitudeString(exifDataObject);
         this.longitudeString = this.parseLongitudeString(exifDataObject);
-    
-        // Set Image Element and Data
+
         if (ImageElement) {
-            this.image.ImageElement = ImageElement || null;
-            this.image.ImageData = this.dataFormatter.blobToDataUrl(ImageElement) || null;
+            let imageData = this.dataFormatter.bufferArrayToDataUrl(ImageElement, 'image/jpeg');
+            
+            this.dataFormatter.bufferArrayToImage(ImageElement, 'image/jpeg')
+            .then((res) => {
+                if (res) {
+                    this.image.ImageElement = res || null;
+                } else {
+                    throw new Error('Error parsing image element');
+                }
+            });
+            
+            this.image.ImageData = `${imageData}` || null;
         }
     
         // Set Thumbnail Data
@@ -86,60 +153,5 @@ export default class ExifImageFactory {
         this.image.Orientation = `${exifDataObject.Orientation}` || null;
     
         return this.image;
-    }
-
-    
-    parseLatitudeString(exifDataObject) {
-        if (exifDataObject.GPSLatitude) {
-            return this.gpsFormatter.formatCoordaniteArray(
-                [exifDataObject.GPSLatitude[0], 
-                exifDataObject.GPSLatitude[1], 
-                exifDataObject.GPSLatitude[2]], 
-                exifDataObject.GPSLatitudeRef
-            );
-        } else {
-            return null;
-        }
-    }
-
-    parseLongitudeString(exifDataObject) {
-        if (exifDataObject.GPSLongitude) {
-            return this.gpsFormatter.formatCoordaniteArray([
-                exifDataObject.GPSLongitude[0], 
-                exifDataObject.GPSLongitude[1], 
-                exifDataObject.GPSLongitude[2]], 
-                exifDataObject.GPSLongitudeRef
-            );
-        } else {
-            return null;
-        }
-    }
-
-    parseLatitude(lat, lon) {
-        if (lat && lon) {
-            return this.gpsFormatter.formatPosition(lat, lon).getLatitude();
-        } else {
-            return null;
-        }
-    }
-
-    parseLongitude(lat, lon) {
-        if (lat && lon) {
-            return this.gpsFormatter.formatPosition(lat, lon).getLongitude();
-        } else {
-            return null;
-        }
-    }
-    
-
-    parsePosition(lat, lon) {
-        if (lat && lon) {
-            return this.gpsFormatter.formatPosition(this.latitude, this.longitude);
-        } else {
-            return {
-                latitude: null,
-                longitude: null
-            }
-        }
     }
 }
