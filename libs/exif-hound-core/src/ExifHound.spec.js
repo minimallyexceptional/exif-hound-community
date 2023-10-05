@@ -28,7 +28,7 @@ describe('ExifHound.parseExifData', () => {
   });
 
   it('should resolve with EXIF data when parsing is successful', async () => {
-    const img = {}; // You can provide a sample image or an empty object
+    const img = ''; // You can provide a sample image or an empty object
     const mockExifData = {
       Make: 'Canon',
       Model: 'EOS 5D Mark IV',

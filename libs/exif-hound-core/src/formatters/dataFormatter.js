@@ -1,42 +1,20 @@
 import { Buffer } from 'buffer';
+import { createCanvas } from 'canvas';
+
 export default class DataFormatter {
 
   blobToDataUrl(blob) {
-    if (blob instanceof Blob) {
-      const buffer = Buffer.from(blob, 'base64');
-      return `data:image/gif;base64,${buffer.toString('base64')}`;
-    }
-
-    return null;
-  }
-
-  async blobToBase64(blob) {
+    if (!(blob instanceof Blob)) return null;
+    
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-
       reader.onload = () => {
-        const base64String = reader.result.split(',')[1];
-        resolve(base64String);
+        const buffer = Buffer.from(reader.result);
+        const dataUrl = `data:image/gif;base64,${buffer.toString('base64')}`;
+        resolve(dataUrl);
       };
-
-      reader.onerror = (error) => {
-        reject(error);
-      };
-
-      reader.readAsDataURL(blob);
-    });
-  }
-
-  async imageToBlob(img) {
-    return new Promise((resolve, reject) => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      ctx.drawImage(img, 0, 0);
-      canvas.toBlob((blob) => {
-        resolve(blob);
-      }, 'image/jpeg', 1);
+      reader.onerror = reject;
+      reader.readAsArrayBuffer(blob);
     });
   }
 
@@ -51,7 +29,6 @@ export default class DataFormatter {
   
     return dataUrl;
   }
-
 
   async bufferArrayToImage(bufferArray, mimeType) {
     // Convert the Buffer array to a Uint8Array
@@ -69,7 +46,7 @@ export default class DataFormatter {
     // Set the src attribute to the data URL
     img.src = dataUrl;
 
-    return `${img}`;
+    return img;
   }
 
 }

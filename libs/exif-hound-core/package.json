@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rm -rf ./dist/ && rollup -c",
     "test": "ts-node ./node_modules/mocha/bin/mocha --watch-extensions js 'src/**/**.spec.js'",
-    "test:watch": "mocha --watch-extensions js --watch --watch-files src 'src/**/**.spec.js'",
+    "test:watch": "ts-node ./node_modules/mocha/bin/mocha --watch --watch-extensions js 'src/**/**.spec.js'",
     "lint": "eslint *.ts*"
   },
   "devDependencies": {
@@ -16,7 +16,9 @@
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.15.5",
     "@types/sinon": "^10.0.13",
+    "canvas": "^2.11.2",
     "chai": "^4.3.7",
+    "jsdom": "^22.1.0",
     "mocha": "^10.2.0",
     "rollup": "^3.29.4",
     "sinon": "^15.0.2",
