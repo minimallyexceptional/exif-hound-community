@@ -53,18 +53,6 @@ export default class ExifImageFactory {
         }
     }
     
-
-    parsePosition(lat, lon) {
-        if (lat && lon) {
-            return this.gpsFormatter.formatPosition(this.latitude, this.longitude);
-        } else {
-            return {
-                latitude: null,
-                longitude: null
-            }
-        }
-    }
-
     async createImage(ImageElement, exifDataObject) {
         this.image = new ExifImage();
     
