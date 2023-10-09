@@ -53,10 +53,11 @@ export default class ExifImageFactory {
         }
     }
     
-    async createImage(ImageElement, exifDataObject) {
+    async createImage(ImageElement, exifDataObject, name) {
         this.image = new ExifImage();
     
 
+        this.image.Name = name || null;
         this.image.Id = UUID();
 
         // Parsed Values
@@ -91,8 +92,8 @@ export default class ExifImageFactory {
         this.image.DateTimeDigitized = `${exifDataObject.DateTimeDigitized}` || null;
     
         // Set Meta
-        this.image.ExifVersion = `${exifDataObject.ExifVersion}` || null;
-        this.image.ExifIFDPointer = `${exifDataObject.ExifIFDPointer}` || null;
+        // this.image.ExifVersion = `${exifDataObject.ExifVersion}` || null;
+        // this.image.ExifIFDPointer = `${exifDataObject.ExifIFDPointer}` || null;
     
         // Set GPS Data
         this.image.GPSLatitude = this.parseLatitude(this.latitudeString, this.longitudeString) || null;
@@ -119,26 +120,26 @@ export default class ExifImageFactory {
         this.image.LightSource = `${exifDataObject.LightSource}` || null;
     
         // Set Additional Data
-        this.image.ComponentsConfiguration = `${exifDataObject.ComponentsConfiguration}` || null;
-        this.image.Contrast = `${exifDataObject.Contrast}` || null;
-        this.image.CustomRendered = `${exifDataObject.CustomRendered}` || null;
-        this.image.ExposureBias = `${exifDataObject.ExposureBias}` || null;
-        this.image.ExposureMode = `${exifDataObject.ExposureMode}` || null;
-        this.image.ExposureProgram = `${exifDataObject.ExposureProgram}` || null;
-        this.image.ExposureTime = `${exifDataObject.ExposureTime}` || null;
-        this.image.FNumber = `${exifDataObject.FNumber}` || null;
-        this.image.MaxApertureValue = `${exifDataObject.MaxApertureValue}` || null;
-        this.image.MeteringMode = `${exifDataObject.MeteringMode}` || null;
-        this.image.PixelXDimension = `${exifDataObject.PixelXDimension}` || null;
-        this.image.PixelYDimension = `${exifDataObject.PixelYDimension}` || null;
-        this.image.ResolutionUnit = `${exifDataObject.ResolutionUnit}` || null;
-        this.image.SceneCaptureType = `${exifDataObject.SceneCaptureType}` || null;
-        this.image.SceneType = `${exifDataObject.SceneType}` || null;
-        this.image.WhiteBalance = `${exifDataObject.WhiteBalance}` || null;
-        this.image.XResolution = `${exifDataObject.XResolution}` || null;
-        this.image.YResolution = `${exifDataObject.YResolution}` || null;
-        this.image.YCbCrPositioning = `${exifDataObject.Orientation}` || null;
-        this.image.Orientation = `${exifDataObject.Orientation}` || null;
+        // this.image.ComponentsConfiguration = `${exifDataObject.ComponentsConfiguration}` || null;
+        // this.image.Contrast = `${exifDataObject.Contrast}` || null;
+        // this.image.CustomRendered = `${exifDataObject.CustomRendered}` || null;
+        // this.image.ExposureBias = `${exifDataObject.ExposureBias}` || null;
+        // this.image.ExposureMode = `${exifDataObject.ExposureMode}` || null;
+        // this.image.ExposureProgram = `${exifDataObject.ExposureProgram}` || null;
+        // this.image.ExposureTime = `${exifDataObject.ExposureTime}` || null;
+        // this.image.FNumber = `${exifDataObject.FNumber}` || null;
+        // this.image.MaxApertureValue = `${exifDataObject.MaxApertureValue}` || null;
+        // this.image.MeteringMode = `${exifDataObject.MeteringMode}` || null;
+        // this.image.PixelXDimension = `${exifDataObject.PixelXDimension}` || null;
+        // this.image.PixelYDimension = `${exifDataObject.PixelYDimension}` || null;
+        // this.image.ResolutionUnit = `${exifDataObject.ResolutionUnit}` || null;
+        // this.image.SceneCaptureType = `${exifDataObject.SceneCaptureType}` || null;
+        // this.image.SceneType = `${exifDataObject.SceneType}` || null;
+        // this.image.WhiteBalance = `${exifDataObject.WhiteBalance}` || null;
+        // this.image.XResolution = `${exifDataObject.XResolution}` || null;
+        // this.image.YResolution = `${exifDataObject.YResolution}` || null;
+        // this.image.YCbCrPositioning = `${exifDataObject.Orientation}` || null;
+        // this.image.Orientation = `${exifDataObject.Orientation}` || null;
     
         return this.image;
     }

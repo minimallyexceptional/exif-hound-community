@@ -1,5 +1,9 @@
 export default class ExifImage {
     constructor() {
+        // Basic Values
+        this.Id = null;
+        this.Name = null;
+        
         // Image Values
         this.ImageElement = null;
         this.ImageData = null;

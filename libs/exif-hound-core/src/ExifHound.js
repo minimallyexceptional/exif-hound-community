@@ -8,12 +8,12 @@ export default class ExifHound {
         this.imageFactory = new ExifImageFactory();
     }
 
-    parseExifData(img) {
+    parseExifData(img, name) {
         return new Promise((resolve, reject) => {
             exifr.parse(img).then((newDataObject) => {
               this.ImageElement = img;
               this.exifData = newDataObject;
-              let exifImage = this.imageFactory.createImage(img, this.exifData);
+              let exifImage = this.imageFactory.createImage(img, this.exifData, name);
         
               resolve(exifImage);
             }).catch((error) => {

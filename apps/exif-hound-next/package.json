@@ -1,0 +1,28 @@
+{
+  "name": "exif-hound-next",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "desktop": "tauri",
+    "desktop:dev": "tauri dev",
+    "desktop:build": "tauri build",
+    "desktop:serve": "tauri serve"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^1.5.0",
+    "exif-hound-core": "workspace:^"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^2.4.2",
+    "@tauri-apps/cli": "^1.5.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "svelte": "^4.0.5",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.4"
+  }
+}

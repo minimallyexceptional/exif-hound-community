@@ -5,6 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+    "start": "npm run build",
     "build": "rm -rf ./dist/ && rollup -c",
     "test": "ts-node ./node_modules/mocha/bin/mocha --watch-extensions js 'src/**/**.spec.js'",
     "test:watch": "ts-node ./node_modules/mocha/bin/mocha --watch --watch-extensions js 'src/**/**.spec.js'",

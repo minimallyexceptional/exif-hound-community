@@ -1,41 +1,14 @@
 {
   "name": "exif-hound-api",
-  "version": "0.0.0",
-  "private": true,
-  "description": "Exif Hound API",
-  "author": "Minimally Exceptional LLC",
-  "main": "src/server.ts",
-  "scripts": {
-    "start": "ts-node src/server/server.ts",
-    "dev": "nodemon src/server/server.ts",
-    "build": "rm -rf build/ && prettier --write src/server && tsc",
-    "test": "mocha --require ts-node/register --watch-extensions ts 'src/**/**.spec.ts'",
-    "test:watch": "TS_NODE_TRANSPILE_ONLY=true NODE_ENV=test mocha --require ts-node/register --watch-extensions ts --watch --watch-files src 'src/**/**.spec.ts'",
-    "stress-test": "autocannon -c 7000 -p 50 -d 5 http://localhost:3000"
+  "module": "index.js",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   },
   "dependencies": {
     "exif-hound-core": "workspace:^0.0.1"
-  },
-  "devDependencies": {
-    "@types/chai": "^4.3.4",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "^18.15.5",
-    "@types/restify": "^8.5.6",
-    "@types/restify-errors": "^4.3.5",
-    "@types/sinon": "^10.0.13",
-    "@types/swagger-ui": "^3.52.0",
-    "autocannon": "^7.10.0",
-    "chai": "^4.3.7",
-    "dotenv": "^16.0.3",
-    "mocha": "^10.2.0",
-    "nodemon": "^2.0.21",
-    "prettier": "^2.8.6",
-    "restify": "^11.1.0",
-    "restify-errors": "^8.0.2",
-    "sinon": "^15.0.2",
-    "ts-node": "^10.9.1",
-    "turbo": "^1.8.5",
-    "typescript": "^5.0.2"
-  },
-  "license": "MIT"
+  }
 }
