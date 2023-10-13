@@ -1,50 +1,32 @@
 <script>
-  import Greet from './lib/Greet.svelte'
-  import { loadImages } from './lib/file-utils.js'
-  import { images } from './lib/store.js';
+  import ImageList from './components/ImageList.svelte';
+  import Sidebar from './components/Sidebar.svelte';
+  import Toolbar from './components/Toolbar.svelte';
+
 
 </script>
 
-<main class="container">
-  <h1>Welcome to THE SVT STACK</h1>
+<html lang="html" class="w-screen h-screen p-0 m-0 overflow-hidden">
+  <main id="container" class="flex w-full h-full">
+    <div class="h-auto">
+      <Sidebar />
+    </div>
 
-  <div class="row ">
-    <a href="https://svelte.dev" target="_blank">
-      <img src="/svelte.svg" class="logo svelte" alt="Svelte Logo" />
-    </a>
-    <a href="https://tauri.app" target="_blank">
-      <img src="/tauri.svg" class="logo tauri" alt="Tauri Logo" />
-    </a>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo vite" alt="Vite Logo" />
-    </a>
-    <input id="image-input" type="file" on:change={(e) =>  loadImages(e, images)} multiple />
-  </div>
+    <div id="content-section" class="bg-red-400 h-full w-full">  
+      
+      <div id="toolbar-section" class="flex flex-col justify-center center h-auto w-full bg-pink-600" >
+        <Toolbar />
+      </div>
 
-  <p>
-    Click on the Tauri, Vite, and Svelte logos to learn more.
-  </p>
+      <div id="map-section" class="h-[73vh] bg-blue-900"></div>
 
-  <div class="row">
-    <Greet />
-  </div>
+      <div id="image-list-section" class="bg-pink-500 h-50">
+        <ImageList />
+      </div>
 
-  <div class="row">
-    <h2>Images</h2>
-    <ul>
-      {#each $images as image}
-        <li class="bg-green-800 text-red-400">{image.Name}</li>
-      {/each}
-    </ul>
-
-</main>
+    </div>
+  </main>
+</html>
 
 <style>
-  .logo.vite:hover {
-    filter: drop-shadow(0 0 2em #747bff);
-  }
-
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00);
-  }
 </style>
