@@ -8,13 +8,18 @@
     "build": "vite build",
     "preview": "vite preview",
     "desktop": "tauri",
+    "test": "mocha ./src/**/**.spec.js",
     "desktop:dev": "tauri dev",
     "desktop:build": "tauri build",
     "desktop:serve": "tauri serve"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.5.0",
-    "exif-hound-core": "workspace:^"
+    "chai": "^4.3.7",
+    "exif-hound-core": "workspace:^",
+    "jsdom": "^22.1.0",
+    "leaflet": "^1.9.4",
+    "mocha": "^10.2.0"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.4.2",

@@ -33,24 +33,25 @@ async function load(file) {
     }
 }
 
-async function loadImage(hound, store, imageBuffer, name) {
+async function loadImage(hound, imageBuffer, name) {
     try {
         // Parse EXIF data from the image with ExifHound
         const exifData = await hound.parseExifData(imageBuffer, name);
 
-        // Handle EXIF data or perform any other processing here
-        // For example, you can access properties like exifData.GPSLatitude, exifData.GPSLongitude, etc.
-        store.addImage(exifData);
-
         // Return the image buffer or exif data as needed
-        return { imageBuffer, exifData };
+        if (exifData && imageBuffer) {
+            return { name: name, imageBuffer: imageBuffer, exifData: exifData || null };
+        } else {
+            console.error('No exif data found');
+        }
+        
     } catch (error) {
         console.error('Error:', error.message);
         throw error;
     }
 }
 
-export async function loadImages(event, store) {
+export async function loadImages(event) {
     const fileList = event.target.files;
     
     const hound = new ExifHound();
@@ -58,12 +59,15 @@ export async function loadImages(event, store) {
     
     try {
         if (files.length > 1) {
-            console.log('Loading multiple files ', files);
-
-            return Promise.all(files.map(file => load(file).then(imageBuffer => loadImage(hound, store, imageBuffer, file.name))));
+            
+            return Promise.all(
+                files.map(file => load(file)
+                .then(imageBuffer => loadImage(hound, imageBuffer, file.name))
+            ));
+        
         } else {
             const imageBuffer = await load(files[0]);
-            return loadImage(hound, store, imageBuffer);
+            return loadImage(hound, imageBuffer);
         }
     } catch (error) {
         console.error('Error:', error.message);
