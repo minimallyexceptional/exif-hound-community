@@ -51,8 +51,6 @@ export default async function loadImages(fileList, store) {
     
     try {
         if (files.length > 1) {
-            console.log('Loading multiple files ', files);
-
             return Promise.all(files.map(file => load(file).then(imageBuffer => loadImage(hound, store, imageBuffer))));
         } else {
             const imageBuffer = await load(files[0]);

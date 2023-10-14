@@ -1,21 +1,24 @@
-<script>
-    import { UUID } from "exif-hound-core/utils/utils";
-
-
+<script lang="ts">
+  import type { ExifImage } from "../types";
   import { loadImages } from "../lib/file-utils";
-  import { images } from '../lib/images';
+  import createStore from '../state';
+
+  const Store = createStore();
   
   var fileinput;
 
   async function getExifData(e) {
     return loadImages(e)
-    .then(file => {
+    .then((file: any) => {
       if (file) {
-          images.addImage({
-            id: UUID(),
-            selected: true, 
-            file,
-          });
+          Store.selectImage(file);
+          Store.loadExifImage(file);
+          Store.loadMapImage({
+            id: file.id,
+            lat: file.position.lat,
+            long: file.position.long,
+            imagePopup: file.imageData.exif.ImageData
+          })
       }
     });
   }
@@ -38,7 +41,7 @@
                 </span>          
                 Add Image(s)
             </button>
-            <input style="display:none" type="file" accept=".jpg, .jpeg, .png" on:change={(e) => getExifData(e)} bind:this={fileinput} >w
+            <input style="display:none" type="file" accept=".jpg, .jpeg, .png" on:change={(e) => getExifData(e)} bind:this={fileinput} >
         </div>
       </div>
     </div>

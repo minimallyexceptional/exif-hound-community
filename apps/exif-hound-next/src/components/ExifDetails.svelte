@@ -1,12 +1,15 @@
 <script>
-    import { selected } from "../lib/selected";
+    import createStore from "../state";
+
     let currentKeys = [];
     let currentValues = [];
     
-    selected.subscribe(selected => {
-        if (selected) {
-            currentKeys = Object.keys(selected.file.exifData);
-            currentValues = Object.values(selected.file.exifData);
+    const Store = createStore();
+
+    Store.subscribe(store => {
+        if (store.selectedImage) {
+            currentKeys = Object.keys(store.selectedImage.imageData.exif);
+            currentValues = Object.values(store.selectedImage.imageData.exif);
         }
     })
 </script>
