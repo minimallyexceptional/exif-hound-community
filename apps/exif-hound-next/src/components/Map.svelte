@@ -33,28 +33,20 @@
             if (lat && lon) {
                 addImageMarker(map, lat, lon, popupImage);
                 flyTo(map, lat, lon);
-            } else {
-                return;
             }
         });
     });
 
     Store.subscribe((store) => {
-        if (store.selectedImage) {
-            if (
-                store.selectedImage.position.lat &&
-                store.selectedImage.position.long
-            ) {
-                flyTo(
-                    map,
-                    store.selectedImage.position.lat,
-                    store.selectedImage.position.long
-                );
+    	const selectedImage = store.selectedImage;
+    	
+        if (selectedImage) {
+           	if (selectedImage.position.lat && selectedImage.position.long) {
+                flyTo(map, store.selectedImage.position.lat, store.selectedImage.position.long);
             }
-        } else {
-            return;
         }
     });
+    
 </script>
 
 <html lang="html">
