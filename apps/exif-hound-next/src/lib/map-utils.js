@@ -15,3 +15,7 @@ export function addImageMarker(map, lat, lon, popup) {
 export function flyTo(map, lat, lon) {
     map.flyTo([lat, lon], 13);
 }
+
+export function resizeMap(tileLayer) {
+    tileLayer.redraw();
+}

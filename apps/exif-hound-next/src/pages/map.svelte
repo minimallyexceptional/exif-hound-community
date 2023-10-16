@@ -4,6 +4,21 @@
     import Map from "../components/Map.svelte";
     import Sidebar from "../components/Sidebar.svelte";
     import Toolbar from "../components/Toolbar.svelte";
+    import createStore from '../state';
+
+    const Store = createStore();
+
+    let isToolbarOpen;
+    let isExifOpen;
+    let isImagePanelOpen;
+
+    Store.subscribe((store) => {
+        console.log('EXIF PANEL CANGEED ', store);
+        isToolbarOpen = store.toolbarOpen
+        isExifOpen = store.exifPanelOpen
+        isImagePanelOpen = store.imagePanelOpen
+    })
+    
 </script>
 
 <main id="container" class="flex w-full h-full">
@@ -16,16 +31,24 @@
             id="toolbar-section"
             class="flex flex-col justify-center center h-auto w-full bg-pink-600"
         >
-            <Toolbar />
+            {#if isToolbarOpen}
+                <Toolbar />
+            {/if}
         </div>
 
         <div id="map-section" class="h-auto w-full flex flex-row">
             <Map />
-            <ExifDetails />
         </div>
 
         <div id="image-list-section" class="h-50">
             <ImageList />
         </div>
     </div>
+
+    {#if isExifOpen}
+        <div id="exif-details-section w-full">
+            <ExifDetails />
+        </div>
+    {/if}
+
 </main>

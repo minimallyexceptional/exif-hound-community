@@ -23,6 +23,7 @@ export default function createStore() {
             return Object.assign(oldState, { currentPage: page });
         }),
         selectImage: (image: ExifImage) => update((oldState: any) => {
+            console.log('Selecting Image ', oldState);
             return Object.assign(oldState, { selectedImage: image });;
         }),
         deSelectImage: () => update((oldState: any) => {
@@ -32,7 +33,8 @@ export default function createStore() {
             return Object.assign(oldState, { imageSelectorOpen: !oldState.imageSelectorOpen });
         }),
         toggleExifPanel: () => update((oldState: any) => {
-            return Object.assign(oldState, { exifPanel: !oldState.exifPanel });
+            console.log('Changing exif panel state ', oldState.exifPanelOpen )
+            return Object.assign(oldState, { exifPanelOpen: !oldState.exifPanelOpen });
         }),
         toggleToolbar: () => update((oldState: any) => {
             return Object.assign(oldState, { toolbarOpen: !oldState.toolbarOpen });

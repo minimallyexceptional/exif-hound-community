@@ -1,5 +1,5 @@
 export interface ExifImage {
-    id: string | number,
+    id: string,
     dateAdded: string,
     name: string,
     imageData: {
