@@ -27,8 +27,8 @@
 
 </script>
 
-<nav class="border-b border-gray-200 bg-black"> 
-    <div class="flex h-16 justify-center bg-black">
+<nav class="border-b border-gray-200"> 
+    <div class="flex h-16 justify-center bg-gray-900">
       
       <div class="flex justify-center align-cente">
 
@@ -36,14 +36,12 @@
           
           <button class="p-2 rounded bg-white w-full flex flex-row`" on:click={()=> fileinput.click()}>
               <span class="text-black" >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                </svg>      
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                  <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clip-rule="evenodd" />
+                </svg>                 
               </span>
           </button>
           <input style="display:none" type="file" accept=".jpg, .jpeg, .png" on:change={(e) => getExifData(e)} bind:this={fileinput} >
       </div>
-      
     </div>
 </nav>

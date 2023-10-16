@@ -33,7 +33,6 @@ export default function createStore() {
             return Object.assign(oldState, { imageSelectorOpen: !oldState.imageSelectorOpen });
         }),
         toggleExifPanel: () => update((oldState: any) => {
-            console.log('Changing exif panel state ', oldState.exifPanelOpen )
             return Object.assign(oldState, { exifPanelOpen: !oldState.exifPanelOpen });
         }),
         toggleToolbar: () => update((oldState: any) => {
