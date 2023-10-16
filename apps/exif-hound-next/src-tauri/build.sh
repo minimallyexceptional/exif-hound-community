@@ -1,0 +1,1 @@
+sudo cargo run cargo-tauri build

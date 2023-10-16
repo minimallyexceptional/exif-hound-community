@@ -7,11 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "desktop": "tauri",
-    "test": "mocha ./src/**/**.spec.js",
-    "desktop:dev": "tauri dev",
-    "desktop:build": "tauri build",
-    "desktop:serve": "tauri serve"
+    "tauri": "tauri",
+    "test": "mocha ./src/**/**.spec.js"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.5.0",
