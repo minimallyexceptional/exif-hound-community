@@ -5,7 +5,6 @@ import { useApplicationState } from '../context/ApplicationState';
 
 import MapView from '../components/map/MapView'
 import DetailsView from '../components/details/DetailsView';
-import ImageViewer from '../components/imageViewer/ImageViewer';
 
 const DetailPage = () => {
 
@@ -51,38 +50,11 @@ const DetailPage = () => {
     }
 
     return (
-        <React.Fragment>
-            <div className="exif-details-container">
+        <div className='flex h-full w-full'>
+            <div className="exif-details-container w-full">
                 <DetailsView store={store}/>
             </div>
-            <div className="side-split-container">
-                <div className="side-split-section-image">
-                    {renderSelectedImage(store.selectedImage)}
-                </div>
-                <div className="side-split-section-navigation">
-                    <div className="navigation-button-section">
-                        <button 
-                            className="navigation-button"
-                            onClick={() => navigateToPreviousImage(store)}
-                        >
-                            <FaChevronCircleLeft/>
-                        </button>
-                        <span className="navigation-progress">
-                            {`${store.images.indexOf(store.selectedImage)}/${store.images.length}`}
-                        </span>
-                        <button 
-                            className="navigation-button"
-                            onClick={() => navigateToNextImage()}
-                        >
-                            <FaChevronCircleRight/>
-                        </button>
-                    </div>
-                </div>
-                <div className="side-split-section-map">
-                    {renderMapView(store.selectedImage)}
-                </div>
-            </div>
-        </React.Fragment>
+        </div>
     );
 }
 

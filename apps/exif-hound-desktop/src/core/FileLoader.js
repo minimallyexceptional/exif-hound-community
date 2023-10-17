@@ -33,8 +33,6 @@ async function loadImage(hound, store, imageBuffer) {
         // Parse EXIF data from the image with ExifHound
         const exifData = await hound.parseExifData(imageBuffer);
 
-        // Handle EXIF data or perform any other processing here
-        // For example, you can access properties like exifData.GPSLatitude, exifData.GPSLongitude, etc.
         store.addImage(exifData);
 
         // Return the image buffer or exif data as needed

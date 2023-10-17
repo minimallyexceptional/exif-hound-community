@@ -14,3 +14,15 @@ body {
 #root { 
     @apply p-0 m-0 h-full w-full overflow-hidden;
 }
+
+.btn {
+    @apply bg-black border border-white border-2 h-[75px] p-4 w-full text-white !important;
+}
+
+.card {
+    @apply bg-white p-4 drop-shadow-lg rounded-xl mt-4 mb-4;
+}
+
+.card-dark {
+    @apply bg-slate-950 p-4 drop-shadow-lg rounded-xl mt-4 mb-4;
+}

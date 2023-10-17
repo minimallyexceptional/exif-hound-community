@@ -4,8 +4,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { observer } from 'mobx-react';
 
-import './app.css';
-
 import SplashPage from './pages/SplashPage';
 import MapPage from './pages/MapPage';
 import DetailPage from './pages/DetailPage';
