@@ -25,7 +25,7 @@ func main() {
 			Assets: assets,
 		},
 		Linux: &linux.Options{
-			WebviewGpuPolicy: linux.WebviewGpuPolicyNever,
+			WebviewGpuPolicy: linux.WebviewGpuPolicyAlways,
 		},
 		BackgroundColour: &options.RGBA{R: 27, G: 38, B: 54, A: 1},
 		OnStartup:        app.startup,

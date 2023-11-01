@@ -41,11 +41,6 @@ func InitDatabase(dbPath string) *sql.DB {
 
 	createImage.Exec("123DD123DS-312DDSD0-SAD232DW-DAS21DSQ", "Test Image", "00100102001002", "png")
 
-	// _, err = db.Exec(createTable)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
 	fmt.Println("Database and table created successfully!")
 
 	return db
@@ -68,7 +63,7 @@ func InsertImage(db *sql.DB, image structs.ExifFile) error {
 }
 
 func GetImage(db *sql.DB, ImageID string) string {
-	rows, _ := db.Query(`SELECT id, name FROM images`)
+	rows, _ := db.Query(`SELECT ? FROM images`, ImageID)
 
 	var id string
 	var name string

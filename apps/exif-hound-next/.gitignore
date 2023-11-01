@@ -1,5 +1,6 @@
 build/bin
 node_modules
 frontend/dist
-.temp/
+.tmp/
 .data/
+tests/.data/
