@@ -26,7 +26,7 @@
 
         <div class="sidebar-actions">
 
-            <button class="sidebar-button" >
+            <!-- <button class="sidebar-button" >
                 <input
                     type="file"
                     style="position: absolute; bottom: 0px; top: -1px; left: 0px; right: 0px; opacity: 0;"
@@ -35,7 +35,7 @@
                 <svg class="sidebar-icon" fill="whitesmoke" width="30" height="30"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
                 </svg>
-            </button>
+            </button> -->
 
             <div class="sidebar-button">
                 <svg class="sidebar-icon" fill="whitesmoke" width="30" height="30"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -74,15 +74,12 @@
 <style>
     .sidebar {
         background-color: #111;
-        padding: 10px;
-        padding-top: 5px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: top;
         height: 100vh;
         width: 75px;
-        padding: 5px;
     }
 
     .logo-wrap {

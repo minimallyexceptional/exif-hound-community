@@ -90,3 +90,13 @@ func GetImage(db *sql.DB, ImageID string) string {
 
 	return string(jsonData)
 }
+
+func DeleteImage(db *sql.DB, ImageID string) sql.Result {
+	var statement = `DELETE FROM images WHERE Id = ?`
+	deleteResponse, err := db.Exec(statement, ImageID)
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+
+	return deleteResponse
+}

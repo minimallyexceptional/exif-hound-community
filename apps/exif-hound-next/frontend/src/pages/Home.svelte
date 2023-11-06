@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
   
     
-    import { SaveFile, CleanFiles, GetImage } from '../../wailsjs/go/main/App.js'
+    import { SaveFile, DeleteImage, GetImage } from '../../wailsjs/go/main/App.js'
     import loadImages from '../utils/FileLoader.js';
     
     import Map from '../components/Map.svelte';
@@ -30,6 +30,15 @@
         console.log('GETITNG IMAGE FROM DATABASE ', imageData)
       })
     }
+
+    function deleteImage() {
+      let id = "8fe24d16-3a57-42a7-80ab-00a58f7000aa"
+  
+      DeleteImage(id)
+      .then(data => {
+        console.log('Deleted Image ', id)
+      })
+    }
   
     onMount(() => {
       getImage();
@@ -45,13 +54,16 @@
       <!-- {#if imageData}
         <img class="demo-image" src={imageData} alt="">
       {/if} -->
-      <Map />
+      <!-- <Map /> -->
+      <button on:click={deleteImage}>DELETE IMAGE</button>
     </div>
 
   </main>
   
   <style>
     .page-wrap {
+      padding: 0;
+      margin: 0;
       display: flex;
       background-color: whitesmoke;
       height: 100%;
@@ -67,7 +79,7 @@
 
     .content-wrap {
       background-color: tan;
-      width: calc(100% - 20px);
+      width: calc(100% - 75px);
       padding: 0;
       margin: 0;
     }

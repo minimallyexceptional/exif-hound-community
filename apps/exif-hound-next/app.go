@@ -6,6 +6,7 @@ import (
 	"changeme/go/utils/storage"
 	"changeme/go/utils/structs"
 	"context"
+	"fmt"
 )
 
 // App struct
@@ -43,4 +44,9 @@ func (a *App) CleanFiles() {
 
 func (a *App) GetImage(id string) string {
 	return storage.GetImage(db, id)
+}
+
+func (a *App) DeleteImage(id string) {
+	var result = storage.DeleteImage(db, id)
+	fmt.Println(result)
 }

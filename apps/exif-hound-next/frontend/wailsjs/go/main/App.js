@@ -6,6 +6,10 @@ export function CleanFiles() {
   return window['go']['main']['App']['CleanFiles']();
 }
 
+export function DeleteImage(arg1) {
+  return window['go']['main']['App']['DeleteImage'](arg1);
+}
+
 export function GetImage(arg1) {
   return window['go']['main']['App']['GetImage'](arg1);
 }
