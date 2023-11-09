@@ -23,32 +23,48 @@ func InitDatabase(dbPath string) *sql.DB {
 	// defer db.Close()
 
 	// Create the images table
-	createTable := `
+	createImageTable := `
 		CREATE TABLE IF NOT EXISTS images (
 			id INTERGER NOT NULL PRIMARY KEY,
 			name TEXT NOT NULL,
 			data TEXT NOT NULL,
-			extension TEXT NOT NULL 
+			extension TEXT NOT NULL
 		);
 	`
 
-	imageTable, _ := db.Prepare(createTable)
+	imageTable, imageErr := db.Prepare(createImageTable)
+	if imageErr != nil {
+		println(imageErr)
+	}
+
 	imageTable.Exec()
 
-	createImage, _ := db.Prepare(`
-	 INSERT INTO images (id, name, data, extension) VALUES (?, ?, ?, ?)
-	`)
+	createExifTable := `
+		CREATE TABLE IF NOT EXISTS exifdata (
+			id INTERGER NOT NULL PRIMARY KEY,
+			imageData TEXT NOT NULL,
+			latitude TEXT NOT NULL,
+			longitude TEXT NOT NULL
+		);
+	`
 
-	createImage.Exec("123DD123DS-312DDSD0-SAD232DW-DAS21DSQ", "Test Image", "00100102001002", "png")
+	exifTable, exifErr := db.Prepare(createExifTable)
+	if exifErr != nil {
+		println(exifErr)
+	}
 
-	fmt.Println("Database and table created successfully!")
+	exifTable.Exec()
+
+	// createImage, _ := db.Prepare(`
+	//  INSERT INTO images (id, name, data, extension) VALUES (?, ?, ?, ?)
+	// `)
+
+	// createImage.Exec("123DD123DS-312DDSD0-SAD232DW-DAS21DSQ", "Test Image", "00100102001002", "png")
 
 	return db
 }
 
 func InsertImage(db *sql.DB, image structs.ExifFile) error {
-	println("CREATING IMAGE IN DB ", image.Id)
-
 	createImage, _ := db.Prepare(`
 	 INSERT INTO images (id, name, data, extension) VALUES (?, ?, ?, ?)
 	`)
@@ -67,20 +83,19 @@ func GetImage(db *sql.DB, ImageID string) string {
 
 	var id string
 	var name string
+	var data string
+	var ext string
 
 	for rows.Next() {
-		rows.Scan(&id, &name)
+		rows.Scan(&id, &name, &data, &ext)
 		fmt.Println(id + ": " + name)
 	}
 
-	type Image struct {
-		Id   string
-		Name string
-	}
-
-	foundImage := Image{
-		Id:   id,
-		Name: name,
+	foundImage := structs.ExifFile{
+		Id:        id,
+		Name:      name,
+		ImageData: data,
+		Extension: ext,
 	}
 
 	jsonData, err := json.Marshal(foundImage)

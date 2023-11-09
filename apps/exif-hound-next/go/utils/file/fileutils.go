@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"regexp"
 
 	"github.com/google/uuid"
 )
@@ -11,7 +12,8 @@ import (
 func DecodeBase64(message string) (retour string) {
 	base64Text := make([]byte, base64.StdEncoding.DecodedLen(len(message)))
 	base64.StdEncoding.Decode(base64Text, []byte(message))
-	return string(base64Text)
+	str := regexp.MustCompile("\x00").ReplaceAllString(string(base64Text), "")
+	return str
 }
 
 func UUID() string {
