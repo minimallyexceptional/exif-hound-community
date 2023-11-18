@@ -7,6 +7,13 @@ type ExifFile struct {
 	Extension string `json:"extension"`
 }
 
+type Meta struct {
+	Id           string `json:"id"`
+	Name         string `json:"name"`
+	GPSLatitude  string `json:"latitude"`
+	GPSLongitude string `json:"longitude"`
+}
+
 type ExifMetadata struct {
 	Id string `json:"id"`
 

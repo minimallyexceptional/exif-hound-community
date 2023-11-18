@@ -19,8 +19,9 @@ func InitDatabase(dbPath string) *sql.DB {
 
 	if err != nil {
 		log.Fatal(err)
+		defer db.Close()
+
 	}
-	// defer db.Close()
 
 	// Create the images table
 	createImageTable := `
@@ -42,7 +43,6 @@ func InitDatabase(dbPath string) *sql.DB {
 	createExifTable := `
 		CREATE TABLE IF NOT EXISTS exifdata (
 			id INTERGER NOT NULL PRIMARY KEY,
-			imageData TEXT NOT NULL,
 			latitude TEXT NOT NULL,
 			longitude TEXT NOT NULL
 		);
@@ -55,15 +55,10 @@ func InitDatabase(dbPath string) *sql.DB {
 
 	exifTable.Exec()
 
-	// createImage, _ := db.Prepare(`
-	//  INSERT INTO images (id, name, data, extension) VALUES (?, ?, ?, ?)
-	// `)
-
-	// createImage.Exec("123DD123DS-312DDSD0-SAD232DW-DAS21DSQ", "Test Image", "00100102001002", "png")
-
 	return db
 }
 
+// CREATE
 func InsertImage(db *sql.DB, image structs.ExifFile) error {
 	createImage, _ := db.Prepare(`
 	 INSERT INTO images (id, name, data, extension) VALUES (?, ?, ?, ?)
@@ -78,6 +73,21 @@ func InsertImage(db *sql.DB, image structs.ExifFile) error {
 	return nil
 }
 
+func InsertExif(db *sql.DB, image structs.Meta) error {
+	createMeta, _ := db.Prepare(`
+	INSERT INTO images (id, latitude, longitude) VALUES (?, ?, ?)
+   `)
+
+	_, err := createMeta.Exec(image.Id, image.GPSLatitude, image.GPSLongitude)
+	if err != nil {
+		println(err)
+		return err
+	}
+
+	return nil
+}
+
+// READ
 func GetImage(db *sql.DB, ImageID string) string {
 	rows, _ := db.Query(`SELECT ? FROM images`, ImageID)
 
@@ -106,6 +116,7 @@ func GetImage(db *sql.DB, ImageID string) string {
 	return string(jsonData)
 }
 
+// DELETE
 func DeleteImage(db *sql.DB, ImageID string) sql.Result {
 	var statement = `DELETE FROM images WHERE Id = ?`
 	deleteResponse, err := db.Exec(statement, ImageID)

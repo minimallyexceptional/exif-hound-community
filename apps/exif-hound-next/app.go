@@ -3,10 +3,8 @@ package main
 import (
 	"changeme/go/core/exifhound"
 	fileutils "changeme/go/utils/file"
-	"changeme/go/utils/storage"
 	"changeme/go/utils/structs"
 	"context"
-	"fmt"
 )
 
 // App struct
@@ -19,7 +17,7 @@ func NewApp() *App {
 	return &App{}
 }
 
-var db = storage.InitDatabase(".data/data.db")
+var tmpPath = "../../../.tmp/"
 
 // startup is called when the app starts. The context is saved
 // so we can call the runtime methods
@@ -35,18 +33,17 @@ func (a *App) SaveFile(name string, data string, ext string) string {
 		Extension: ext,
 	}
 
-	return exifhound.SaveFile(db, image)
+	return exifhound.SaveFile(image, tmpPath)
 }
 
 func (a *App) CleanFiles() {
-	exifhound.ClearCache()
+	exifhound.ClearCache(tmpPath)
 }
 
 func (a *App) GetImage(id string) string {
-	return storage.GetImage(db, id)
+	return exifhound.GetImage(id)
 }
 
 func (a *App) DeleteImage(id string) {
-	var result = storage.DeleteImage(db, id)
-	fmt.Println(result)
+	exifhound.DeleteImage(id)
 }
